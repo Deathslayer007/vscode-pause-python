@@ -1,0 +1,12 @@
+.vscode/**
+.vscode-test/**
+src/**
+node_modules/**
+.gitignore
+tsconfig.json
+webpack.config.js
+**/*.ts
+**/*.map
+package-lock.json
+.DS_Store
+.env

@@ -1,0 +1,80 @@
+{
+  "name": "pause-python",
+  "displayName": "Pause Python",
+  "description": "Pause and resume long-running Python scripts directly from the VS Code terminal without Debug Mode.",
+  "version": "0.0.1",
+  "publisher": "manan",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pause-python.pause",
+        "title": "Pause Python: Pause Python Process",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "pause-python.resume",
+        "title": "Pause Python: Resume Python Process",
+        "icon": "$(debug-continue)"
+      }
+    ],
+    "menus": {
+      "terminal/title/context": [
+        {
+          "command": "pause-python.pause",
+          "when": "!pause-python:isPaused",
+          "group": "navigation"
+        },
+        {
+          "command": "pause-python.resume",
+          "when": "pause-python:isPaused",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "pause-python.pause",
+          "when": "terminalIsOpen"
+        },
+        {
+          "command": "pause-python.resume",
+          "when": "terminalIsOpen"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "pause-python.pause",
+        "key": "ctrl+shift+p ctrl+shift+p",
+        "when": "terminalFocus && !pause-python:isPaused"
+      },
+      {
+        "command": "pause-python.resume",
+        "key": "ctrl+shift+p ctrl+shift+p",
+        "when": "terminalFocus && pause-python:isPaused"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npx webpack --mode production",
+    "compile": "npx webpack --mode development",
+    "watch": "npx webpack --mode development --watch"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "ts-loader": "^9.5.1"
+  }
+}
